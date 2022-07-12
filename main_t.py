@@ -1,11 +1,10 @@
-!pip uninstall openpyxl
-!pip install openpyxl
+import openpyxl as openpyxl
 import requests
 from bs4 import BeautifulSoup
 import json
 import pandas as pd
 from datetime import date
-from google.colab import files
+# from google.colab import files
 import os.path
 
 # **Acesso aos sites**
@@ -209,7 +208,7 @@ index=False
 totalArray.clear()
 
 # **Download do documento**
-files.download('base_noticias.xlsx')
+# files.download('base_noticias.xlsx')
 
 # **Ordenamento do dataframe por site e data**
 mixedNews = mixedNews.sort_values(by=['site', 'date'])
