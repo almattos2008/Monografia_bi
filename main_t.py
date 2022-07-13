@@ -7,6 +7,8 @@ from datetime import date
 # from google.colab import files
 import os.path
 
+import database_connection
+
 # **Acesso aos sites**
 urlG1 = "https://g1.globo.com/"
 urlR7 = "https://www.r7.com/"
