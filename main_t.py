@@ -6,8 +6,16 @@ import pandas as pd
 from datetime import date
 # from google.colab import files
 import os.path
+import mysql.connector
 
-import database_connection
+# import database_connection
+
+# print(pd.read_sql(database_connection.connect()))
+
+connection = mysql.connector.connect(host='localhost',
+                                         database='news_headlines',
+                                         user='root',
+                                         password='')
 
 # **Acesso aos sites**
 urlG1 = "https://g1.globo.com/"
@@ -65,7 +73,8 @@ today = date.today()
 # dd/mm/YY
 totalArray=[]
 
-d1 = today.strftime("%d/%m/%Y")
+def set_date():
+    d1 = today.strftime("%Y/%m/%d")
 
 # **Construção do dicionário**
 def getClasses(siteName, navigationType, classes):
@@ -75,9 +84,11 @@ def getClasses(siteName, navigationType, classes):
 def constructDict(siteName, parsed):
   for news in parsed:
     info = {}
-    info['date']=d1
-    info['site']=siteName
-    info['news']=news.get_text()
+    info['news_date']=today.strftime("%Y/%m/%d")
+    info['web_site']=siteName
+    info['headline']=news.get_text()
+    info['theme_prediction'] = "TEST"
+    info['theme'] = "TEST"
     totalArray.append(info)
 
 # **Construção do DataFrame**
@@ -87,14 +98,20 @@ def toDataSet(newsArray):
   # print(df)
 
 # **Comparação entre o arquivo e o acesso atual**
-def compare(siteDf):
+def compare(siteDf, previousDf):
   dfN = previousDf.merge(siteDf,indicator=True, how='right')
   dfN = dfN[dfN._merge != 'both']
+  print(dfN)
   dfN.pop('_merge')
   return dfN
 
+def compare2(siteDf, previousDf):
+  dfN = previousDf.join(siteDf, how='right', on='headline')
+  print(dfN)
+  return dfN
+
 # **Montagem do DataFrame com informações novas**
-def append(differenceDf):
+def append(differenceDf, previousDf):
   newDf = previousDf.append(differenceDf)
   return newDf
 
@@ -190,36 +207,44 @@ def callAllSites():
     callEstadao()
     callBbc()
     callTerra()
+    return totalArray
 
 # **Chamada principal da aplicação**
-callAllSites()
-previousDf = selectPreviowsDataFrame()
-# print(previousDf.tose)
-newNews = compare(toDataSet(totalArray))
-print("New News")
-print(newNews)
-mixedNews = append(newNews)
-mixedNews = mixedNews.sort_values(by=['site', 'date'])
-print(mixedNews)
+def main_call():
+    callAllSites()
+    previousDf = selectPreviowsDataFrame()
+    # print(previousDf.tose)
+    newNews = compare(toDataSet(totalArray))
+    print("New News")
+    print(newNews)
+    mixedNews = append(newNews)
+    mixedNews = mixedNews.sort_values(by=['site', 'date'])
+    print(mixedNews)
 
 # **Salvar em Excel e limpar o array**
-mixedNews.to_excel("base_noticias.xlsx",
-# header=0,
-index=False
-)
-totalArray.clear()
+def to_excel_and_clean_array(mixedNews):
+    mixedNews.to_excel("base_noticias.xlsx",
+    # header=0,
+    index=False
+    )
+    totalArray.clear()
 
 # **Download do documento**
 # files.download('base_noticias.xlsx')
 
 # **Ordenamento do dataframe por site e data**
-mixedNews = mixedNews.sort_values(by=['site', 'date'])
+# mixedNews = mixedNews.sort_values(by=['site', 'date'])
 
 # **Seleções por data**
 # Seleção por data
-mixedNews[mixedNews['date'] == '03/02/2022']
+# mixedNews[mixedNews['date'] == '03/02/2022']
 
 
 # **Seleção por site**
 # Seleção por site
-mixedNews[mixedNews['site'] == 'BBC']
+# mixedNews[mixedNews['site'] == 'BBC']
+
+def toSQL():
+    print(toDataSet(totalArray).to_sql("news", connection))
+
+# toSQL()

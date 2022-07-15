@@ -6,7 +6,7 @@ create table news (
 
 news_date				date,
 web_site				varchar(20),
-headline				blob,
+headline				text,
 theme_prediction		varchar(50),
 theme					varchar(50)
 
