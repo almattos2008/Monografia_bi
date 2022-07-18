@@ -3,13 +3,15 @@ import pymysql
 import pandas as pd
 import main_t
 import sqlalchemy
+from datetime import date
 
 sqlEngine = create_engine('mysql+pymysql://root:@127.0.0.1/news_headlines', pool_recycle=3600)
 
-def get_all_news():
+def get_stored_news():
     dbConnection = connect()
-    frame = pd.read_sql("select * from news", dbConnection)
-    pd.set_option('display.expand_frame_repr', False)
+    frame = pd.read_sql("select web_site, headline  from news", dbConnection)
+    # frame = pd.read_sql("SELECT DATE_FORMAT(news_date, '%%Y-%%m-%%d') as news_date  from news", dbConnection)
+    # pd.set_option('display.expand_frame_repr', False)
     # print(frame)
     close(dbConnection)
     return frame
@@ -27,10 +29,12 @@ def connect():
 def close(dbConnection):
     dbConnection.close()
 
-previous_df = get_all_news()
-# print(previous_df)
+previous_df = get_stored_news()
 totalArray = main_t.callAllSites()
 dataframe = main_t.toDataSet(totalArray)
-# print(dataframe)
-# merged_df = main_t.compare2(dataframe, previous_df)
-save_news(dataframe)
+dataframe.pop('theme_prediction')
+dataframe.pop('theme')
+merged_df = main_t.compare(dataframe, previous_df)
+dated_merged_df = merged_df.assign(news_date=date.today().strftime("%Y/%m/%d"))
+print(dated_merged_df)
+save_news(dated_merged_df)

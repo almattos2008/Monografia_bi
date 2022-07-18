@@ -57,24 +57,8 @@ for portalName in responses:
     print(str(responses[portalName].status_code) + " " + portalName)
     parsedHtml[portalName] = BeautifulSoup(responses[portalName].text, "html.parser")
 
-
-# **Carregamento do arquivo em .xlsx**
-def selectPreviowsDataFrame():
-  if os.path.isfile("base_noticias.xlsx"):
-    previousDf = pd.read_excel("base_noticias.xlsx")
-    return previousDf
-  else:
-    previousDf = pd.DataFrame({'date':[], 'site':[], 'news':[]})
-    return previousDf
-
-# **Definição do dia atual**
-today = date.today()
-
 # dd/mm/YY
 totalArray=[]
-
-def set_date():
-    d1 = today.strftime("%Y/%m/%d")
 
 # **Construção do dicionário**
 def getClasses(siteName, navigationType, classes):
@@ -84,7 +68,6 @@ def getClasses(siteName, navigationType, classes):
 def constructDict(siteName, parsed):
   for news in parsed:
     info = {}
-    info['news_date']=today.strftime("%Y/%m/%d")
     info['web_site']=siteName
     info['headline']=news.get_text()
     info['theme_prediction'] = "TEST"
@@ -100,20 +83,11 @@ def toDataSet(newsArray):
 # **Comparação entre o arquivo e o acesso atual**
 def compare(siteDf, previousDf):
   dfN = previousDf.merge(siteDf,indicator=True, how='right')
-  dfN = dfN[dfN._merge != 'both']
   print(dfN)
+  dfN = dfN[dfN._merge != 'both']
   dfN.pop('_merge')
   return dfN
 
-def compare2(siteDf, previousDf):
-  dfN = previousDf.join(siteDf, how='right', on='headline')
-  print(dfN)
-  return dfN
-
-# **Montagem do DataFrame com informações novas**
-def append(differenceDf, previousDf):
-  newDf = previousDf.append(differenceDf)
-  return newDf
 
 # **G1**
 def callG1():
@@ -209,42 +183,3 @@ def callAllSites():
     callTerra()
     return totalArray
 
-# **Chamada principal da aplicação**
-def main_call():
-    callAllSites()
-    previousDf = selectPreviowsDataFrame()
-    # print(previousDf.tose)
-    newNews = compare(toDataSet(totalArray))
-    print("New News")
-    print(newNews)
-    mixedNews = append(newNews)
-    mixedNews = mixedNews.sort_values(by=['site', 'date'])
-    print(mixedNews)
-
-# **Salvar em Excel e limpar o array**
-def to_excel_and_clean_array(mixedNews):
-    mixedNews.to_excel("base_noticias.xlsx",
-    # header=0,
-    index=False
-    )
-    totalArray.clear()
-
-# **Download do documento**
-# files.download('base_noticias.xlsx')
-
-# **Ordenamento do dataframe por site e data**
-# mixedNews = mixedNews.sort_values(by=['site', 'date'])
-
-# **Seleções por data**
-# Seleção por data
-# mixedNews[mixedNews['date'] == '03/02/2022']
-
-
-# **Seleção por site**
-# Seleção por site
-# mixedNews[mixedNews['site'] == 'BBC']
-
-def toSQL():
-    print(toDataSet(totalArray).to_sql("news", connection))
-
-# toSQL()
