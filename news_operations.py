@@ -1,5 +1,6 @@
 import openpyxl as openpyxl
 import requests
+import identification
 from bs4 import BeautifulSoup
 import json
 import pandas as pd
@@ -67,11 +68,12 @@ def getClasses(siteName, navigationType, classes):
 
 def constructDict(siteName, parsed):
   for news in parsed:
+    theme = identification.identifify(news.get_text())
     info = {}
     info['web_site']=siteName
     info['headline']=news.get_text()
     info['theme_prediction'] = "TEST"
-    info['theme'] = "TEST"
+    info['theme'] = theme
     totalArray.append(info)
 
 # **Construção do DataFrame**
