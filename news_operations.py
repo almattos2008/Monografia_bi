@@ -68,12 +68,11 @@ def getClasses(siteName, navigationType, classes):
 
 def constructDict(siteName, parsed):
   for news in parsed:
-    theme = identification.identifify(news.get_text())
     info = {}
     info['web_site']=siteName
     info['headline']=news.get_text()
-    info['theme_prediction'] = "TEST"
-    info['theme'] = theme
+    info['theme_prediction'] = ""
+    # info['?theme'] = theme
     totalArray.append(info)
 
 # **Construção do DataFrame**
@@ -85,7 +84,7 @@ def toDataSet(newsArray):
 # **Comparação entre o arquivo e o acesso atual**
 def compare(siteDf, previousDf):
   dfN = previousDf.merge(siteDf,indicator=True, how='right')
-  print(dfN)
+  # print(dfN)
   dfN = dfN[dfN._merge != 'both']
   dfN.pop('_merge')
   return dfN
