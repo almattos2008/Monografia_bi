@@ -6,31 +6,49 @@ from googletrans import Translator
 import nltk
 
 nltk.download('stopwords')
+
 nltk.download('punkt')
 classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
 translator = Translator(service_urls=['translate.googleapis.com'])
 # classifier = pipeline("zero-shot-classification", model="cross-encoder/nli-distilroberta-base")
 # classifier = pipeline("zero-shot-classification", model="joeddav/xlm-roberta-large-xnli")
 
-stop_words = set(stopwords.words('portuguese'))
+stop_words = set(stopwords.words('english'))
 
 # candidate_labels = ['viagem', 'politica', 'esporte', 'guerra', 'mundo', 'natureza', 'policial', 'saúde', 'eleições',
 #                     'economia', 'televisão', 'educação', 'violência', 'moda', 'tecnologia', 'artes', 'música']
 
-candidate_labels = ['travel', 'politics', 'sports', 'war', 'world', 'nature', 'health', 'elections',
-                    'economy', 'entertainment', 'education', 'violence', 'fashion', 'tecnology', 'arts', 'music']
+candidate_labels = ['travel', 'politics', 'sports', 'war', 'nature', 'health', 'elections',
+                    'economy', 'entertainment', 'education', 'violence', 'fashion', 'technology', 'arts', 'music',
+                    'justice', 'food', 'business', 'styles', 'science']
 
 
 def identifify(news):
-    word_tokens = word_tokenize(news)
+    # word_tokens = word_tokenize(news)
+    # filtered_sentence = [w for w in word_tokens if not w.lower() in stop_words]
+    # final_string = ''
+    # for x in filtered_sentence:
+    #     final_string += ' ' + x
+    # print(googletrans.LANGUAGES)
+    # print(googletrans.__version__)
+    translated_news = translator.translate(news, src='pt').text
+    word_tokens = word_tokenize(translated_news)
     filtered_sentence = [w for w in word_tokens if not w.lower() in stop_words]
     final_string = ''
     for x in filtered_sentence:
         final_string += ' ' + x
-    # translated_news = translator.translate("final_string", src='pt').text
-    news_classified = classifier(final_string, candidate_labels, multi_label=True)["labels"][0]
-    # news_classified = classifier(filtered_sentence, candidate_labels)["labels"][0]
-    return news_classified
+    # news_classified = classifier(translated_news, candidate_labels, multi_label=True)["labels"][0]
+    news_classified = classifier(final_string, candidate_labels, multi_label=True)
+    print(news_classified["sequence"])
+    print(news)
+    print(news_classified["labels"])
+    print(news_classified["scores"])
+    score = int(news_classified["scores"][0]*100)
+    if(score>=80):
+        return news_classified["labels"][0]
+    else:
+        return 0
+
 
 
 # word_tokens = word_tokenize("news a bela e a fera")

@@ -71,7 +71,7 @@ def constructDict(siteName, parsed):
     info = {}
     info['web_site']=siteName
     info['headline']=news.get_text()
-    info['theme_prediction'] = ""
+    # info['theme_prediction'] = ""
     # info['?theme'] = theme
     totalArray.append(info)
 
