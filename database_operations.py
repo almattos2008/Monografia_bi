@@ -4,16 +4,40 @@ import sqlalchemy
 
 sqlEngine = create_engine('mysql+pymysql://root:@127.0.0.1/news_headlines', pool_recycle=3600)
 
-def get_stored_news():
+def get_stored_news(yesterday):
     dbConnection = connect()
-    frame = pd.read_sql("select web_site, headline  from news", dbConnection)
+    frame = pd.read_sql("select web_site, headline  from news where news_date >= '" + yesterday +"'" , dbConnection)
     # frame = pd.read_sql("SELECT DATE_FORMAT(news_date, '%%Y-%%m-%%d') as news_date  from news", dbConnection)
     # pd.set_option('display.expand_frame_repr', False)
     # print(frame)
     close(dbConnection)
     return frame
 
+def get_stored_specific_themed_news(yesterday, theme):
+    dbConnection = connect()
+    frame = pd.read_sql("select web_site, headline  from news where news_date >= '" + yesterday +"' and theme = '"+ theme +"'" , dbConnection)
+    # frame = pd.read_sql("SELECT DATE_FORMAT(news_date, '%%Y-%%m-%%d') as news_date  from news", dbConnection)
+    # pd.set_option('display.expand_frame_repr', False)
+    # print(frame)
+    close(dbConnection)
+    return frame
+
+def get_stored_not_themed_news(yesterday, theme):
+    dbConnection = connect()
+    frame = pd.read_sql("select web_site, headline  from news where news_date >= '" + yesterday +"' and theme_prediction is not null" , dbConnection)
+    # frame = pd.read_sql("SELECT DATE_FORMAT(news_date, '%%Y-%%m-%%d') as news_date  from news", dbConnection)
+    # pd.set_option('display.expand_frame_repr', False)
+    # print(frame)
+    close(dbConnection)
+    return frame
+
+
 def save_news(dataFrame):
+    dbConnection = connect()
+    dataFrame.to_sql("news", dbConnection, if_exists='append', index=False, dtype={'news_date': sqlalchemy.DateTime()})
+    close(dbConnection)
+
+def save_themes(dataFrame):
     dbConnection = connect()
     dataFrame.to_sql("news", dbConnection, if_exists='append', index=False, dtype={'news_date': sqlalchemy.DateTime()})
     close(dbConnection)
