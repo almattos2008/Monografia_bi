@@ -20,36 +20,36 @@ connection = mysql.connector.connect(host='localhost',
 
 # **Acesso aos sites**
 urlG1 = "https://g1.globo.com/economia/"
-# urlR7 = "https://www.r7.com/"
-# urlUol = "https://www.uol.com.br/"
-# urlCnnBrasil = "https://www.cnnbrasil.com.br/"
-# urlFolha = "https://www.folha.uol.com.br/"
-# urlVeja = "https://veja.abril.com.br/"
+urlR7 = "https://noticias.r7.com/economia"
+urlUol = "https://economia.uol.com.br/"
+urlCnnBrasil = "https://www.cnnbrasil.com.br/business/"
+urlFolha = "https://www1.folha.uol.com.br/mercado/"
+urlVeja = "https://veja.abril.com.br//economia"
 # urlYahoo = "https://br.noticias.yahoo.com/"
-# urlEstadao = "https://www.estadao.com.br/"
-# urlBbcBrasil = "https://www.bbc.com/portuguese"
+urlEstadao = "https://economia.estadao.com.br/"
+urlBbcBrasil = "https://www.bbc.com/portuguese/topics/cvjp2jr0k9rt"
 # urlTerra = "https://www.terra.com.br/noticias/"
 
 responses = {}
 
 responses['G1'] = requests.get(urlG1, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
-# responses['R7'] = requests.get(urlR7, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-#                                       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
-# responses['Uol'] = requests.get(urlUol, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-#                                       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
-# responses['CnnBrasil'] = requests.get(urlCnnBrasil, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-#                                       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
-# responses['Folha'] = requests.get(urlFolha, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-#                                       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
-# responses['Veja'] = requests.get(urlVeja, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-#                                       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
+responses['R7'] = requests.get(urlR7, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
+responses['Uol'] = requests.get(urlUol, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
+responses['CnnBrasil'] = requests.get(urlCnnBrasil, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
+responses['Folha'] = requests.get(urlFolha, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
+responses['Veja'] = requests.get(urlVeja, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
 # responses['Yahoo'] = requests.get(urlYahoo, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
 #                                       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
-# responses['Estadao'] = requests.get(urlEstadao, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-#                                       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
-# responses['BbcBrasil'] = requests.get(urlBbcBrasil, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-#                                       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
+responses['Estadao'] = requests.get(urlEstadao, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
+responses['BbcBrasil'] = requests.get(urlBbcBrasil, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
 # responses['Terra'] = requests.get(urlTerra, headers={"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
 #                                       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"})
 
@@ -173,5 +173,14 @@ def callTerra():
 # **Busca site a site**
 def call_themed_sites():
     callG1()
+    callR7()
+    callUol()
+    callCnn()
+    callFolha()
+    callVeja()
+    # callYahoo()
+    callEstadao()
+    callBbc()
+    # callTerra()
     return totalArray
 
