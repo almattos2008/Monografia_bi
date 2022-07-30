@@ -10,8 +10,8 @@ nltk.download('stopwords')
 nltk.download('punkt')
 facebook_classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
 translator = Translator(service_urls=['translate.googleapis.com'])
-# classifier = pipeline("zero-shot-classification", model="cross-encoder/nli-distilroberta-base")
-roberta_classifier = pipeline("zero-shot-classification", model="joeddav/xlm-roberta-large-xnli")
+roberta_classifier = pipeline("zero-shot-classification", model="cross-encoder/nli-distilroberta-base")
+# roberta_classifier = pipeline("zero-shot-classification", model="joeddav/xlm-roberta-large-xnli")
 
 stop_words = set(stopwords.words('english'))
 
