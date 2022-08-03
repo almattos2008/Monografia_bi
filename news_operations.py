@@ -7,20 +7,11 @@ import pandas as pd
 from datetime import date
 # from google.colab import files
 import os.path
-import mysql.connector
-
-
-# import database_connection
-
-# print(pd.read_sql(database_connection.connect()))
 
 class news_operations:
 
     def __init__(self):
-        self.connection = mysql.connector.connect(host='localhost',
-                                             database='news_headlines',
-                                             user='root',
-                                             password='')
+
 
         # **Acesso aos sites**
         self.urlG1 = "https://g1.globo.com/"
@@ -79,6 +70,7 @@ class news_operations:
     def getClasses(self, siteName, navigationType, classes):
         parsed = self.parsedHtml[siteName].find_all(navigationType, {"class": classes})
         self.constructDict(siteName, parsed)
+
 
     def constructDict(self, siteName, parsed):
         for news in parsed:
