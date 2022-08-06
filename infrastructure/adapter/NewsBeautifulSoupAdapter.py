@@ -40,4 +40,13 @@ class NewsBeautifulSoupAdapter:
         for cn in class_navigation:
             self.getClasses(web_site_name, navigation_type, cn)
 
+    def call_odd_web_site(self, web_site_name, url, class_navigation, navigation_type):
+        self.initiate_beautifull_soup(web_site_name, url)
+        for news in self.parsedHtml[web_site_name].find_all(class_navigation):
+            self.construct_dict(web_site_name, news.find_all(navigation_type))
+
+    def retrieve_array(self):
         return self.total_array
+
+    def empty_array(self):
+        self.total_array = []
