@@ -7,6 +7,7 @@ from googletrans import Translator
 import nltk
 nltk.download('stopwords')
 nltk.download('punkt')
+import infrastructure.adapter.NewsDatabaseAdapter as ndba
 
 class identification:
     def __init__(self):

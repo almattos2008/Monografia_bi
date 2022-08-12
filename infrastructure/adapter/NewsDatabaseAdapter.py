@@ -1,7 +1,9 @@
 import self as self
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, values
 import pandas as pd
 import sqlalchemy
+from sqlalchemy import update
+from sqlalchemy import create_engine
 
 
 class NewsDatabaseAdapter:
@@ -17,6 +19,23 @@ class NewsDatabaseAdapter:
         # print(frame)
         self.close(dbConnection)
         return frame
+
+    def get_stored_news_for_prediction(self):
+        dbConnection = self.connect()
+        frame = pd.read_sql("select headline from news where theme_prediction_roberta is null and theme_prediction_face is null limit 200" , dbConnection)
+        self.close(dbConnection)
+        return frame
+
+
+    def update_news(self, news, roberta, face):
+        # engine = create_engine('sqlite://', echo=False)
+        dbConnection = self.connect()
+        sql =  "UPDATE news SET theme_prediction_roberta = \""+roberta+"\", theme_prediction_face = \""+face+"\" WHERE headline = \""+ news + "\""
+        # update("news").where("news".headline == news)
+        # values(theme_prediction_roberta=roberta, theme_prediction_face=face)
+        # dbConnection.
+        dbConnection.execute(sql)
+        self.close(dbConnection)
 
     def save_news(self, dataFrame):
         dbConnection = self.connect()
