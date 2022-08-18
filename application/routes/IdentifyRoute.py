@@ -7,7 +7,8 @@ class IdentifyRoute:
         self.identifier_uc = iuc.IdentifierUseCase()
 
     def identify(self):
-        self.identifier_uc.identifify_xlm_roberta_large_model()
+        self.identifier_uc.identifify_english()
+        # self.identifier_uc.identify()
 
 ir = IdentifyRoute()
 ir.identify()

@@ -30,9 +30,11 @@ class NewsBeautifulSoupAdapter:
 
     def construct_dict(self, web_site_name, parsed):
         for news in parsed:
+            treated_news = news.get_text().replace('"', '')
+            treated_news = treated_news.replace('%', '')
             info = {}
             info['web_site'] = web_site_name
-            info['headline'] = news.get_text()
+            info['headline'] = treated_news
             self.total_array.append(info)
 
     def call_web_site(self, web_site_name, url, class_navigation, navigation_type):

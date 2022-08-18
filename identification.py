@@ -21,7 +21,7 @@ class identification:
 
         self.candidate_labels = ['travel', 'politics', 'sports', 'war', 'nature', 'health', 'elections',
                             'economy', 'entertainment', 'education', 'violence', 'fashion', 'technology', 'arts', 'music',
-                            'justice', 'food', 'business', 'styles', 'science']
+                            'justice', 'food', 'business', 'styles', 'science', 'weather']
 
 
     def identifify_facebook_model(self, news):

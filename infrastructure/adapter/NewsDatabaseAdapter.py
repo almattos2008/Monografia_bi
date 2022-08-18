@@ -22,20 +22,40 @@ class NewsDatabaseAdapter:
 
     def get_stored_news_for_prediction(self):
         dbConnection = self.connect()
-        frame = pd.read_sql("select headline from news where theme_prediction_roberta is null and theme_prediction_face is null limit 200" , dbConnection)
+        frame = pd.read_sql("select headline from news where theme_prediction_roberta is null and theme_prediction_face is null limit 500" , dbConnection)
         self.close(dbConnection)
         return frame
 
 
-    def update_news(self, news, roberta, face):
+    def update_news(self, news, roberta, face,roberta_pt,face_pt):
         # engine = create_engine('sqlite://', echo=False)
         dbConnection = self.connect()
-        sql =  "UPDATE news SET theme_prediction_roberta = \""+roberta+"\", theme_prediction_face = \""+face+"\" WHERE headline = \""+ news + "\""
+        sql =  "UPDATE news SET theme_prediction_roberta = \""+roberta+"\", theme_prediction_face = \""+face+"\", theme_prediction_roberta_pf = \""+roberta_pt+"\", theme_prediction_face_pt = \""+face_pt+"\" WHERE headline like \""+ news + "\""
+        # print(sql)
         # update("news").where("news".headline == news)
         # values(theme_prediction_roberta=roberta, theme_prediction_face=face)
         # dbConnection.
         dbConnection.execute(sql)
         self.close(dbConnection)
+
+    def update_news_in_portuguese(self, news, roberta_pt, face_pt):
+        # engine = create_engine('sqlite://', echo=False)
+        dbConnection = self.connect()
+        sql =  "UPDATE news SET theme_prediction_roberta_portuguese = \""+roberta_pt+"\", theme_prediction_face_portuguese = \""+face_pt+"\" WHERE headline like \""+ news + "\""
+        print(sql)
+        # update("news").where("news".headline == news)
+        # values(theme_prediction_roberta=roberta, theme_prediction_face=face)
+        # dbConnection.
+        dbConnection.execute(sql)
+        self.close(dbConnection)
+
+    def get_stored_news_for_portuguese_prediction(self):
+        dbConnection = self.connect()
+        frame = pd.read_sql(
+            "select headline from news where theme_prediction_roberta_portuguese is null and theme_prediction_face_portuguese is null limit 500",
+            dbConnection)
+        self.close(dbConnection)
+        return frame
 
     def save_news(self, dataFrame):
         dbConnection = self.connect()
