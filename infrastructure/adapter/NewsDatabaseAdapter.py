@@ -31,7 +31,7 @@ class NewsDatabaseAdapter:
         # engine = create_engine('sqlite://', echo=False)
         dbConnection = self.connect()
         sql =  "UPDATE news SET theme_prediction_roberta = \""+roberta+"\", theme_prediction_face = \""+face+"\", theme_prediction_roberta_pf = \""+roberta_pt+"\", theme_prediction_face_pt = \""+face_pt+"\" WHERE headline like \""+ news + "\""
-        # print(sql)
+        print(sql)
         # update("news").where("news".headline == news)
         # values(theme_prediction_roberta=roberta, theme_prediction_face=face)
         # dbConnection.

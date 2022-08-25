@@ -30,11 +30,11 @@ class IdentifierUseCase:
 
         self.candidate_labels = ['travel', 'politics', 'sports', 'war', 'nature', 'health', 'elections',
                                  'economy', 'entertainment', 'education', 'violence', 'fashion', 'technology', 'arts',
-                                 'music', 'justice', 'food', 'business', 'styles', 'science', 'weather']
+                                 'music', 'justice', 'food', 'business', 'styles', 'science', 'police', 'weather']
 
         self.candidate_labels_portuguese = ['turismo', 'politica', 'esporte', 'guerra', 'natureza', 'saude', 'eleicoes',
                                  'economia', 'entretenimento', 'educacao', 'violencia', 'moda', 'tecnologia', 'arte',
-                                 'musica','justica', 'comida', 'estilo', 'ciencia', 'policial', 'clima']
+                                 'musica','justica', 'comida', 'negocios', 'estilo', 'ciencia', 'policial', 'clima']
 
 
     # def identifify_facebook_model(self):
