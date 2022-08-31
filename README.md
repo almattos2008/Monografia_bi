@@ -40,11 +40,18 @@ MySql.
 Depois essas informações são acessadas no banco de dados e identificadas com dois modelos, facebook/bart-large-mnli e cross-encoder/nli-distilroberta-base, em ambos os casos, 
 as notícias foram tokenizadas, retiradas algumas stopwords e traduzidas para o inglês. Elas foram identificadas em Inglês e em Português para que as eficiências fossem comparadas.
 Foram capturadas também notícias de economia para que futuramente um modelo pudesse ser trabalhado no caminho de identificar notícias em português com melhor eficiência.
+Alguns problemas que foram percebidos ao longo do desenvolvimento e que foram endereçados:
+Notícias vazias foram apagadas;
+Caracteres que causam confusão com o SQL como '"' e '%' foram retirados;
+Espaços maiores que de 1 caracter foram apagados;
+Frases menores que 5 palavras também foram ignoradas;
+Quebras de linha ('</br>') também foram evitadas 
 
 ### 3. Resultados
 
 Alguns problemas foram identificados, como notícias vazias, caracteres especiais como '"' etc. Eles foram identificados e impedidos de serem salvos no banco de dados.
-Foi observado que as notícias traduzidas para o inglês tiveram um melhor resultado do que aquelas em português
+Foi observado que as notícias traduzidas para o inglês tiveram um melhor resultado do que aquelas em português.
+As notícias foram muito tendentes às eleições, pois estamos em período eleitoral para presidente.
 
 ### 4. Conclusões
 

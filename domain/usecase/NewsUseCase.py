@@ -35,7 +35,7 @@ class NewsUseCase:
         stored_dataframe = self.news_db_adapter.get_stored_news(yesterday.strftime("%Y/%m/%d"))
         diff_dataframe = self.compare(web_sites_dataframes, stored_dataframe)
         diff_dataframe = diff_dataframe.assign(news_date=date.today().strftime("%Y/%m/%d"))
-        diff_dataframe = diff_dataframe.assign(theme="Economia")
+        diff_dataframe = diff_dataframe.assign(theme="economia")
         print("Diferenças: " + str(len(diff_dataframe)))
         self.news_db_adapter.save_news(diff_dataframe)
         self.bs_adapter.empty_array()

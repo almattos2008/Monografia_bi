@@ -22,7 +22,7 @@ class NewsDatabaseAdapter:
 
     def get_stored_news_for_prediction(self):
         dbConnection = self.connect()
-        frame = pd.read_sql("select headline from news where theme_prediction_roberta is null and theme_prediction_face is null limit 500" , dbConnection)
+        frame = pd.read_sql("select headline from news where theme_prediction_roberta is null and theme_prediction_face is null limit 5000" , dbConnection)
         self.close(dbConnection)
         return frame
 
