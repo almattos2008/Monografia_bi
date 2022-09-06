@@ -32,7 +32,7 @@ class NewsBeautifulSoupAdapter:
             word_tokens = word_tokenize(news.get_text())
             if len(word_tokens) >= 5:
                 treated_news = news.get_text().replace('"', '')
-                treated_news = news.get_text().replace('  ', '')
+                treated_news = treated_news.get_text().replace('  ', '')
                 treated_news = treated_news.replace('%', '')
                 treated_news = treated_news.replace('</br>', '')
                 info = {}
