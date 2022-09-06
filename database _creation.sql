@@ -9,6 +9,8 @@ web_site				    varchar(20),
 headline				    text,
 theme_prediction_face       varchar(50),
 theme_prediction_roberta    varchar(50),
+theme_prediction_face_pt    varchar(50),
+theme_prediction_roberta_pf varchar(50),
 theme					    varchar(50)
 
 );
