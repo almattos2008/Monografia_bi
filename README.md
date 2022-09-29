@@ -54,6 +54,8 @@ O modelo 'theme_prediction_face' em inglês teve um resultado levemente superior
 
 A tabela abaixo mostra a quantidade de ocorrências de cada tema pesquisado e compara com as predições.
 
+Cada coluna mostra o número de acertos para cada modelo, com sua porcentagem representada logo abaixodo número absoluto de acertos. O total demonstra qual a classificação real do de cada tema, classifição que foi feita pelo autor do trabalho e no tema economia, cerca de 800 registros foram feitos automaticamente, buscando informações diretamente dos temas de economia dos sites. 
+
 | theme          | theme\_prediction\_face\_pt | theme\_prediction\_roberta\_pt | theme\_prediction\_face | theme\_prediction\_roberta | Total |
 | -------------- | --------------------------- |--------------------------------| ----------------------- | -------------------------- | ----- |
 | Economia       | 150                         | 22                             | 163                     | 124                        | 1007  |
@@ -105,9 +107,21 @@ A tabela abaixo mostra a quantidade de ocorrências de cada tema pesquisado e co
 
 ### 4. Conclusões
 
-Não foi encontrado um modelo muito eficiente para a identificação de notícias em português, pois mos modelos existentes de identificação de notícias encontrados foram  
+Como demonstrado na tabela acima, os modelos não conseguiram alcançar um acerto confortável para fazer predições. Ficando a maior parte abaixo dos 50% de acertos.
 
-Dessa forma, é necessário um modelo treinado em português para um resultado mais robusto.
+Portanto, não foi encontrado um modelo muito eficiente para a identificação de notícias em português.
+
+O modelo "theme_prediction_face" foi que obteve maior resultado, sendo o que teve maior porcentagem de acerto em 15 dos 22 temas escolhidos, seguido do "theme_prediction_roberta" tendo melhor resultado em 6 de 22 temas. Atenção, empates de primeiro lugar são contados para os temas empatados.
+
+O modelo "theme_prediction_face_pt" teve melhor resultado em 3 temas e o  "theme_prediction_robeta_pt" em 1.
+
+Dessa forma podemos concluir que os modelos que as notícias foram traduzidas para o inglês tiveram melhor resultado que os que ficaram simplesmente em português. Isso pode se dever ao fato de que os modelos são feitos para a lingua inglesa, dessa forma perde-se nas predições que são feitas do português em modelos em inglês e possivelmente perde-se também nas traduções feitas para se adequar ao modelo estrangeiro.
+
+Dessa forma, observa-se que é necessário o desenvolvimento de um modelo treinado em português para termos a chance de um resultado mais robusto.
+
+  
+
+
 
 
 
