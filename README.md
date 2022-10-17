@@ -13,13 +13,18 @@ Trabalho apresentado ao curso [BI MASTER](https://ica.puc-rio.ai/bi-master) como
 
 ### Resumo
 
-Este trabalho tenta capturar as notícias das páginas principais de alguns sites de notícias brasileiros e classificá-los de acordo com temas de notícias encontradas nos
-próprios sites de notícias.
+Este trabalho de conclusão de curso objetiva criar um web scrapper eficiente. Foi feito um sistema que tenta capturar as notícias das páginas principais de alguns sites de notícias brasileiros e,
+após, classifica as notícias capturadas com base em dois modelos exstintes no mercado em temas previamente eleitos pelo autor. O programa se inicia com a busca das notícias pela captura 
+das chamadas das notícias. As informações são salvas em um banco de dados MySql. Essas informações são acessadas no referido banco e identificadas com facebook/bart-large-mnli e cross-encoder/nli-distilroberta-base.
+Foram identificados alguns problemas, o que gerou resultados insuficientes.
 
 
 ### 1. Introdução
 
-O trabalho que segue busca criar um web scrapper eficiênte, que consiga capturar, dos sites de notícias, as chamadas e as identifique de forma eficiênte com modelos já existentes no mercado. 
+Este programa surgiu do interesse em trabalhar com webscrapping. Webscrapping consiste em capturar, de forma automatizada, informações em sites ou API's. A partir de relatos de colegas, identifiquei
+a necessidade de classificação de notícias para disponibilização de boletins informativos. A utilização de um sistema automatizado que já classificasse as notícias por tema confere agilidade ao 
+processo de reunião das notícias, diminuindo o tempo de busca do usuário para a criação dos boletins. Assim o objetivo do trabalho foi criar um web scrapper eficiênte, que consiga capturar dos 
+sites de notícias G1, R7, Uol, CNN Brasil, Folha, Veja, BBC Brasil, Estadão e Terra, as chamadas e as identifique de forma eficiênte com modelos já existentes no mercado. 
 
 ### 2. Modelagem
 
